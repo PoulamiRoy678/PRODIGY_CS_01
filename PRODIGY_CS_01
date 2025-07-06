@@ -1,0 +1,43 @@
+def caesar_encrypt(text, shift):
+    result = ""
+    for char in text:
+        if char.isalpha():
+            base = ord('A') if char.isupper() else ord('a')
+            shifted = (ord(char) - base + shift) % 26 + base
+            result += chr(shifted)
+        else:
+            result += char
+    return result
+
+def caesar_decrypt(text, shift):
+    return caesar_encrypt(text, -shift)
+
+def main():
+    print("=== Caesar Cipher Tool ===")
+    while True:
+        print("\nOptions:")
+        print("1. Encrypt a message")
+        print("2. Decrypt a message")
+        print("3. Exit")
+        choice = input("Choose an option (1/2/3): ")
+
+        if choice == '1':
+            message = input("Enter the message to encrypt: ")
+            shift = int(input("Enter shift value (e.g., 3): "))
+            encrypted = caesar_encrypt(message, shift)
+            print("Encrypted message:", encrypted)
+
+        elif choice == '2':
+            message = input("Enter the message to decrypt: ")
+            shift = int(input("Enter shift value used during encryption: "))
+            decrypted = caesar_decrypt(message, shift)
+            print("Decrypted message:", decrypted)
+
+        elif choice == '3':
+            print("Exiting program.")
+            break
+        else:
+            print("Invalid choice. Please select 1, 2, or 3.")
+
+if __name__ == "__main__":
+    main()
